@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI'
 import { BannerItem, CategoryItem, ProductItem, ActivityItem } from '../common/models/DataModels'
 import { HomeApi } from '../common/api/HomeApi'
 import { SearchBar } from '../components/SearchBar'
@@ -38,7 +37,7 @@ export struct HomePage {
   }
 
   private goDetail(item: ProductItem): void {
-    router.pushUrl({
+    this.getUIContext().getRouter().pushUrl({
       url: 'pages/DetailPage',
       params: { id: item.id, name: item.name, price: item.price, color: item.color }
     })
@@ -55,7 +54,7 @@ export struct HomePage {
           categories: this.categories,
           onCategoryClick: (cat: CategoryItem) => {
             // 实际场景：跳转分类列表页，这里演示事件回调从子组件到父组件的传递
-            router.pushUrl({ url: 'pages/DetailPage', params: { name: `${cat.name}分类`, price: 0, color: '#E0E0E0' } })
+            this.getUIContext().getRouter().pushUrl({ url: 'pages/DetailPage', params: { name: `${cat.name}分类`, price: 0, color: '#E0E0E0' } })
           }
         }).margin({ top: 14 })
 

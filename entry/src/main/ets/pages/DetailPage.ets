@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI'
 import { HomeApi } from '../common/api/HomeApi'
 
 @Entry
@@ -14,7 +13,7 @@ struct DetailPage {
   @State cartCount: number = 0
 
   aboutToAppear(): void {
-    const params = router.getParams() as Record<string, Object>
+    const params = this.getUIContext().getRouter().getParams() as Record<string, Object>
     if (params) {
       this.title = (params['name'] as string) || '详情'
       this.price = (params['price'] as number) || 0
@@ -37,7 +36,7 @@ struct DetailPage {
         Text('←').fontSize(22).fontColor('#1A1A1A')
           .width(36).height(36).textAlign(TextAlign.Center)
           .backgroundColor('#F5F5F5').borderRadius(18)
-          .onClick(() => { router.back() })
+          .onClick(() => { this.getUIContext().getRouter().back() })
         Text(this.title).fontSize(18).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
           .layoutWeight(1).maxLines(1).textOverflow({ overflow: TextOverflow.Ellipsis })
         Text('📤').fontSize(18).width(36).height(36).textAlign(TextAlign.Center)
@@ -80,7 +79,7 @@ struct DetailPage {
         Column({ space: 2 }) {
           Text('🏠').fontSize(18)
           Text('首页').fontSize(10).fontColor('#999999')
-        }.width(56).onClick(() => { router.back() })
+        }.width(56).onClick(() => { this.getUIContext().getRouter().back() })
 
         Column({ space: 2 }) {
           Stack() {

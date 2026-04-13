@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI'
 import { DiscoverItem } from '../common/models/DataModels'
 import { DiscoverApi } from '../common/api/DiscoverApi'
 
@@ -17,7 +16,7 @@ struct DiscoverDetailPage {
   @State loading: boolean = true
 
   aboutToAppear(): void {
-    const params = router.getParams() as Record<string, Object>
+    const params = this.getUIContext().getRouter().getParams() as Record<string, Object>
     if (params) {
       this.articleId = (params['id'] as number) || 0
       this.title = (params['title'] as string) || '详情'
@@ -40,7 +39,7 @@ struct DiscoverDetailPage {
         Text('←').fontSize(22).fontColor('#1A1A1A')
           .width(36).height(36).textAlign(TextAlign.Center)
           .backgroundColor('#F5F5F5').borderRadius(18)
-          .onClick(() => { router.back() })
+          .onClick(() => { this.getUIContext().getRouter().back() })
         Text('文章详情').fontSize(18).fontWeight(FontWeight.Bold).fontColor('#1A1A1A')
           .layoutWeight(1)
       }

@@ -1,4 +1,3 @@
-import { router } from '@kit.ArkUI'
 import { DiscoverItem } from '../common/models/DataModels'
 import { DiscoverApi } from '../common/api/DiscoverApi'
 import { DISCOVER_CATEGORIES } from '../common/mock/DiscoverMock'
@@ -49,7 +48,7 @@ export struct DiscoverPage {
             DiscoverCard({
               item: item,
               onCardClick: () => {
-                router.pushUrl({
+                this.getUIContext().getRouter().pushUrl({
                   url: 'pages/DiscoverDetailPage',
                   params: { id: item.id, title: item.title }
                 })
