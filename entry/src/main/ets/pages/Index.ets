@@ -1,5 +1,6 @@
 import { HomePage } from './HomePage'
 import { DiscoverPage } from './DiscoverPage'
+import { ShowroomPage } from './ShowroomPage'
 import { MessagePage } from './MessagePage'
 import { MinePage } from './MinePage'
 
@@ -24,13 +25,15 @@ struct Index {
 
   @Builder TabHome() { this.TabIcon(0, '🏠', '首页') }
   @Builder TabDiscover() { this.TabIcon(1, '🔍', '发现') }
-  @Builder TabMessage() { this.TabIcon(2, '💬', '消息') }
-  @Builder TabMine() { this.TabIcon(3, '👤', '我的') }
+  @Builder TabShowroom() { this.TabIcon(2, '🚗', '展馆') }
+  @Builder TabMessage() { this.TabIcon(3, '💬', '消息') }
+  @Builder TabMine() { this.TabIcon(4, '👤', '我的') }
 
   build() {
     Tabs({ barPosition: BarPosition.End, index: this.activeTab }) {
       TabContent() { HomePage() }.tabBar(this.TabHome)
       TabContent() { DiscoverPage() }.tabBar(this.TabDiscover)
+      TabContent() { ShowroomPage() }.tabBar(this.TabShowroom)
       TabContent() { MessagePage() }.tabBar(this.TabMessage)
       TabContent() { MinePage() }.tabBar(this.TabMine)
     }

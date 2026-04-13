@@ -1,0 +1,364 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "Codex AuroraShowCar generator"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "AuroraShowroom",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "AuroraShowCar",
+      "children": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "name": "BodyCore",
+      "mesh": 0,
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "scale": [
+        2.9,
+        0.55,
+        1.18
+      ]
+    },
+    {
+      "name": "FrontNose",
+      "mesh": 0,
+      "translation": [
+        1.12,
+        0.2,
+        0
+      ],
+      "scale": [
+        0.8,
+        0.18,
+        1.1
+      ]
+    },
+    {
+      "name": "RearDeck",
+      "mesh": 0,
+      "translation": [
+        -1.05,
+        0.22,
+        0
+      ],
+      "scale": [
+        0.72,
+        0.18,
+        1.06
+      ]
+    },
+    {
+      "name": "GlassCabin",
+      "mesh": 1,
+      "translation": [
+        0.02,
+        0.56,
+        0
+      ],
+      "scale": [
+        1.24,
+        0.54,
+        0.86
+      ]
+    },
+    {
+      "name": "Windshield",
+      "mesh": 1,
+      "translation": [
+        0.72,
+        0.38,
+        0
+      ],
+      "scale": [
+        0.2,
+        0.38,
+        0.92
+      ],
+      "rotation": [
+        0,
+        0,
+        0.24,
+        0.97
+      ]
+    },
+    {
+      "name": "WheelFrontLeft",
+      "mesh": 2,
+      "translation": [
+        0.94,
+        -0.46,
+        0.77
+      ],
+      "scale": [
+        0.38,
+        0.38,
+        0.22
+      ]
+    },
+    {
+      "name": "WheelFrontRight",
+      "mesh": 2,
+      "translation": [
+        0.94,
+        -0.46,
+        -0.77
+      ],
+      "scale": [
+        0.38,
+        0.38,
+        0.22
+      ]
+    },
+    {
+      "name": "WheelRearLeft",
+      "mesh": 2,
+      "translation": [
+        -0.94,
+        -0.46,
+        0.77
+      ],
+      "scale": [
+        0.38,
+        0.38,
+        0.22
+      ]
+    },
+    {
+      "name": "WheelRearRight",
+      "mesh": 2,
+      "translation": [
+        -0.94,
+        -0.46,
+        -0.77
+      ],
+      "scale": [
+        0.38,
+        0.38,
+        0.22
+      ]
+    },
+    {
+      "name": "RearSpoiler",
+      "mesh": 0,
+      "translation": [
+        -1.56,
+        0.43,
+        0
+      ],
+      "scale": [
+        0.2,
+        0.1,
+        1.02
+      ]
+    },
+    {
+      "name": "ShowFloor",
+      "mesh": 3,
+      "translation": [
+        0,
+        -0.73,
+        0
+      ],
+      "scale": [
+        4.4,
+        0.04,
+        2.6
+      ]
+    }
+  ],
+  "meshes": [
+    {
+      "name": "BodyMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "GlassMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 1
+        }
+      ]
+    },
+    {
+      "name": "WheelMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 2
+        }
+      ]
+    },
+    {
+      "name": "FloorMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 3
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "BodyOrange",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          0.45,
+          0.16,
+          1
+        ],
+        "metallicFactor": 0.45,
+        "roughnessFactor": 0.36
+      }
+    },
+    {
+      "name": "GlassSmoke",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.18,
+          0.26,
+          0.36,
+          0.68
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.08
+      },
+      "alphaMode": "BLEND"
+    },
+    {
+      "name": "WheelCarbon",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.09,
+          0.11,
+          0.14,
+          1
+        ],
+        "metallicFactor": 0.15,
+        "roughnessFactor": 0.72
+      }
+    },
+    {
+      "name": "FloorSlate",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.13,
+          0.16,
+          0.2,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.92
+      }
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "min": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "max": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "min": [
+        0
+      ],
+      "max": [
+        23
+      ]
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 288,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 288,
+      "byteLength": 288,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 576,
+      "byteLength": 72,
+      "target": 34963
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 648,
+      "uri": "data:application/octet-stream;base64,AAAAPwAAAL8AAAA/AAAAPwAAAD8AAAA/AAAAPwAAAD8AAAC/AAAAPwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAvwAAAD8AAAC/AAAAPwAAAD8AAAC/AAAAPwAAAD8AAAA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAC/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAPwAAAD8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAL8AAAC/AACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcA"
+    }
+  ]
+}
