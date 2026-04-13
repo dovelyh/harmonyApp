@@ -1,15 +1,7 @@
 {
   "src": [
     "pages/Index",
-    "pages/ArkTsGrammarPage",
-    "pages/StateManagementPage",
-    "pages/ComponentsPage",
-    "pages/NavigationLifecyclePage",
-    "pages/DataBusinessPage",
-    "pages/CaseMarketPage",
-    "pages/NewsCasePage",
-    "pages/ShopCasePage",
-    "pages/SettingsCasePage",
-    "pages/DashboardCasePage"
+    "pages/DetailPage",
+    "pages/DiscoverDetailPage"
   ]
 }
