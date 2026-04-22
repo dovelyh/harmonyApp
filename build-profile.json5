@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/lyh/.ohos/config/default_harmonyApp_lKL4TH0Tg938kQnxIuqunW72DpVCC1LmQAZDnQPC4SQ=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B601C0903DDBF3B6E149E0CAA3A0374B55B385D3C2F4CC1A4B0C1CBE3DF7B4BEB77224CE77E9C10",
+          "profile": "/Users/lyh/.ohos/config/default_harmonyApp_lKL4TH0Tg938kQnxIuqunW72DpVCC1LmQAZDnQPC4SQ=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/lyh/.ohos/config/default_harmonyApp_lKL4TH0Tg938kQnxIuqunW72DpVCC1LmQAZDnQPC4SQ=.p12",
+          "storePassword": "0000001B302A8B843E54A0F87465281ADB848970AE9E09E146BF9B5E4681DA52314C675DBFC650AD5FDA4D"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",

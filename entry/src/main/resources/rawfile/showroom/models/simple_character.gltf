@@ -1,0 +1,357 @@
+{
+  "asset": {
+    "version": "2.0",
+    "generator": "Codex SimpleCharacter generator"
+  },
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "SimpleCharacterShowroom",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "name": "SimpleCharacter",
+      "children": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    {
+      "name": "Head",
+      "mesh": 0,
+      "translation": [
+        0,
+        1.32,
+        0
+      ],
+      "scale": [
+        0.42,
+        0.42,
+        0.34
+      ]
+    },
+    {
+      "name": "Neck",
+      "mesh": 0,
+      "translation": [
+        0,
+        0.94,
+        0
+      ],
+      "scale": [
+        0.16,
+        0.12,
+        0.16
+      ]
+    },
+    {
+      "name": "Torso",
+      "mesh": 1,
+      "translation": [
+        0,
+        0.38,
+        0
+      ],
+      "scale": [
+        0.72,
+        0.96,
+        0.32
+      ]
+    },
+    {
+      "name": "LeftArm",
+      "mesh": 1,
+      "translation": [
+        -0.56,
+        0.34,
+        0
+      ],
+      "scale": [
+        0.18,
+        0.84,
+        0.18
+      ]
+    },
+    {
+      "name": "RightArm",
+      "mesh": 1,
+      "translation": [
+        0.56,
+        0.34,
+        0
+      ],
+      "scale": [
+        0.18,
+        0.84,
+        0.18
+      ]
+    },
+    {
+      "name": "Pelvis",
+      "mesh": 2,
+      "translation": [
+        0,
+        -0.32,
+        0
+      ],
+      "scale": [
+        0.46,
+        0.3,
+        0.24
+      ]
+    },
+    {
+      "name": "LeftLeg",
+      "mesh": 2,
+      "translation": [
+        -0.18,
+        -0.96,
+        0
+      ],
+      "scale": [
+        0.22,
+        0.98,
+        0.22
+      ]
+    },
+    {
+      "name": "RightLeg",
+      "mesh": 2,
+      "translation": [
+        0.18,
+        -0.96,
+        0
+      ],
+      "scale": [
+        0.22,
+        0.98,
+        0.22
+      ]
+    },
+    {
+      "name": "LeftFoot",
+      "mesh": 2,
+      "translation": [
+        -0.18,
+        -1.6,
+        0.08
+      ],
+      "scale": [
+        0.24,
+        0.12,
+        0.42
+      ]
+    },
+    {
+      "name": "RightFoot",
+      "mesh": 2,
+      "translation": [
+        0.18,
+        -1.6,
+        0.08
+      ],
+      "scale": [
+        0.24,
+        0.12,
+        0.42
+      ]
+    },
+    {
+      "name": "DisplayFloor",
+      "mesh": 3,
+      "translation": [
+        0,
+        -1.72,
+        0
+      ],
+      "scale": [
+        2.8,
+        0.04,
+        2.2
+      ]
+    }
+  ],
+  "meshes": [
+    {
+      "name": "SkinMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 0
+        }
+      ]
+    },
+    {
+      "name": "TopMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 1
+        }
+      ]
+    },
+    {
+      "name": "BottomMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 2
+        }
+      ]
+    },
+    {
+      "name": "FloorMesh",
+      "primitives": [
+        {
+          "attributes": {
+            "POSITION": 0,
+            "NORMAL": 1
+          },
+          "indices": 2,
+          "material": 3
+        }
+      ]
+    }
+  ],
+  "materials": [
+    {
+      "name": "SkinWarm",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.95,
+          0.78,
+          0.68,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.88
+      }
+    },
+    {
+      "name": "TopBlue",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.28,
+          0.63,
+          0.93,
+          1
+        ],
+        "metallicFactor": 0.04,
+        "roughnessFactor": 0.54
+      }
+    },
+    {
+      "name": "BottomInk",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.18,
+          0.22,
+          0.35,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.78
+      }
+    },
+    {
+      "name": "FloorSlate",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.14,
+          0.18,
+          0.25,
+          1
+        ],
+        "metallicFactor": 0,
+        "roughnessFactor": 0.94
+      }
+    }
+  ],
+  "accessors": [
+    {
+      "bufferView": 0,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3",
+      "min": [
+        -0.5,
+        -0.5,
+        -0.5
+      ],
+      "max": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 24,
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "componentType": 5123,
+      "count": 36,
+      "type": "SCALAR",
+      "min": [
+        0
+      ],
+      "max": [
+        23
+      ]
+    }
+  ],
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteOffset": 0,
+      "byteLength": 288,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 288,
+      "byteLength": 288,
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteOffset": 576,
+      "byteLength": 72,
+      "target": 34963
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 648,
+      "uri": "data:application/octet-stream;base64,AAAAPwAAAL8AAAA/AAAAPwAAAD8AAAA/AAAAPwAAAD8AAAC/AAAAPwAAAL8AAAC/AAAAvwAAAL8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAD8AAAA/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAvwAAAD8AAAC/AAAAPwAAAD8AAAC/AAAAPwAAAD8AAAA/AAAAvwAAAL8AAAC/AAAAvwAAAL8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAC/AAAAvwAAAL8AAAA/AAAAvwAAAD8AAAA/AAAAPwAAAD8AAAA/AAAAPwAAAL8AAAA/AAAAPwAAAL8AAAC/AAAAPwAAAD8AAAC/AAAAvwAAAD8AAAC/AAAAvwAAAL8AAAC/AACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAPwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAACAvwAAAAAAAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgD8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAgL8AAAAAAAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIA/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAAAAAAAAAAAAIC/AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcA"
+    }
+  ]
+}

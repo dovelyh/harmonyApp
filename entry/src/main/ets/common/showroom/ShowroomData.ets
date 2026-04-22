@@ -8,10 +8,10 @@ export interface ShowroomExhibit {
 }
 
 export const SHOWROOM_EXHIBIT: ShowroomExhibit = {
-  title: 'Aurora X 概念车',
-  subtitle: 'ArkGraphics3D 原生 3D 展品',
-  description: '这台展车改成了鸿蒙原生 ArkGraphics3D 渲染链路，页面中间直接由 Component3D 加载本地 glTF 车模，不再依赖 Web 壳。首版支持自动巡航旋转、单指环绕查看和双指缩放，方便后续替换成正式车模资源。',
-  gestureHint: '单指拖动可环绕，双指捏合可缩放，静止后会自动缓慢巡航',
+  title: 'Dog Ziwen 模型',
+  subtitle: 'ArkGraphics3D 原生 3D 查看器',
+  description: '展示区当前接入了桌面提供的本地 GLB 人物模型，页面中间直接通过 ArkGraphics3D 加载资源。用户可以单指上下左右拖动，从不同角度观察模型，也可以双指捏合拉近拉远，后续如果继续换模型，只需要替换 rawfile 资源和加载路径。',
+  gestureHint: '单指上下左右拖动可切换视角，双指捏合可拉近拉远',
   runtimeHint: 'Previewer 暂不支持 Component3D，请以鸿蒙模拟器或真机效果为准。',
-  tags: ['ArkGraphics3D', '原生 3D', '本地 glTF']
+  tags: ['ArkGraphics3D', '人物模型', '本地 GLB']
 }

@@ -4,13 +4,17 @@ import { LightType, Scene } from '@kit.ArkGraphics3D'
 import { AppColors, AppSizes } from '../common/constants/AppConstants'
 import { SHOWROOM_EXHIBIT } from '../common/showroom/ShowroomData'
 import {
-  SHOWROOM_AUTO_ROTATE_STEP,
+  SHOWROOM_CAMERA_TARGET,
   SHOWROOM_DEFAULT_DISTANCE,
+  SHOWROOM_DEFAULT_PITCH,
   buildCameraEye,
-  buildYawQuaternion,
   deriveDistanceFromPinch,
+  derivePitchFromPan,
   deriveYawFromPan
 } from '../common/showroom/Showroom3DHelpers'
+
+const SHOWROOM_MODEL_SCALE: number = 1.18
+const SHOWROOM_MODEL_TILT_RADIANS: number = -Math.PI / 2
 
 @Component
 export struct ShowroomPage {
@@ -18,25 +22,20 @@ export struct ShowroomPage {
   private showroomAssetScene?: Scene
   private showroomModel: Node | null = null
   private showroomCamera: Camera | null = null
-  private autoRotateTimer: number = -1
-  private orbitYaw: number = -0.52
+  private orbitYaw: number = 0.28
+  private orbitPitch: number = SHOWROOM_DEFAULT_PITCH
   private orbitDistance: number = SHOWROOM_DEFAULT_DISTANCE
   private panStartYaw: number = this.orbitYaw
+  private panStartPitch: number = this.orbitPitch
   private pinchStartDistance: number = this.orbitDistance
-  private isInteracting: boolean = false
 
   @State private isLoading: boolean = true
   @State private hasError: boolean = false
-  @State private errorMessage: string = '展品加载失败，请稍后重试'
+  @State private errorMessage: string = '人物模型加载失败，请稍后重试'
   @State private sceneReady: boolean = false
 
   aboutToAppear(): void {
-    this.startAutoRotate()
     this.ensureNativeScene()
-  }
-
-  aboutToDisappear(): void {
-    this.stopAutoRotate()
   }
 
   private async ensureNativeScene(): Promise<void> {
@@ -49,12 +48,12 @@ export struct ShowroomPage {
 
     this.isLoading = true
     this.hasError = false
-    this.errorMessage = '展品加载失败，请稍后重试'
+    this.errorMessage = '人物模型加载失败，请稍后重试'
 
     try {
       const containerScene: Scene = await Scene.load()
-      const assetScene: Scene = await Scene.load($rawfile('showroom/models/aurora_x_showcar.gltf'))
-      const showroomModel: Node = containerScene.importScene('AuroraShowCar', assetScene, null)
+      const assetScene: Scene = await Scene.load($rawfile('showroom/models/dog_ziwen.glb'))
+      const showroomModel: Node = containerScene.importScene('DogZiwen', assetScene, null)
       const sceneFactory = containerScene.getResourceFactory()
       const showroomCamera: Camera = await sceneFactory.createCamera({
         name: 'showroomCamera',
@@ -70,24 +69,25 @@ export struct ShowroomPage {
       }, LightType.DIRECTIONAL)
 
       showroomCamera.enabled = true
-      showroomCamera.fov = 34
+      showroomCamera.fov = 28
       showroomCamera.nearPlane = 0.1
       showroomCamera.farPlane = 40
 
       keyLight.enabled = true
-      keyLight.color = { r: 1, g: 0.97, b: 0.92, a: 1 }
-      keyLight.intensity = 180000
+      keyLight.color = { r: 1, g: 0.96, b: 0.91, a: 1 }
+      keyLight.intensity = 165000
       keyLight.shadowEnabled = false
 
       fillLight.enabled = true
-      fillLight.color = { r: 0.62, g: 0.76, b: 1, a: 1 }
-      fillLight.intensity = 60000
+      fillLight.color = { r: 0.58, g: 0.76, b: 1, a: 1 }
+      fillLight.intensity = 70000
       fillLight.shadowEnabled = false
 
-      this.applyLookAt(keyLight, { x: -3.5, y: 4.2, z: -4.8 }, { x: 0, y: 0.05, z: 0 }, { x: 0, y: 1, z: 0 })
-      this.applyLookAt(fillLight, { x: 4.2, y: 2.6, z: 3.2 }, { x: 0, y: 0.1, z: 0 }, { x: 0, y: 1, z: 0 })
+      this.applyLookAt(keyLight, { x: -3.6, y: 4.6, z: -4.9 }, SHOWROOM_CAMERA_TARGET, { x: 0, y: 1, z: 0 })
+      this.applyLookAt(fillLight, { x: 4.1, y: 2.4, z: 3.6 }, { x: 0, y: 0.4, z: 0 }, { x: 0, y: 1, z: 0 })
 
-      showroomModel.scale = { x: 1.08, y: 1.08, z: 1.08 }
+      showroomModel.rotation = this.quaternionFromAxisAngle({ x: 1, y: 0, z: 0 }, SHOWROOM_MODEL_TILT_RADIANS)
+      showroomModel.scale = { x: SHOWROOM_MODEL_SCALE, y: SHOWROOM_MODEL_SCALE, z: SHOWROOM_MODEL_SCALE }
       this.showroomScene = containerScene
       this.showroomAssetScene = assetScene
       this.showroomModel = showroomModel
@@ -103,8 +103,8 @@ export struct ShowroomPage {
       const businessError = error as BusinessError
       const detail: string = businessError?.message ? businessError.message : `${error}`
       this.errorMessage = detail.length > 0
-        ? `原生 3D 展品加载失败：${detail}`
-        : '原生 3D 展品加载失败，请在鸿蒙模拟器或真机查看效果'
+        ? `原生 3D 人物模型加载失败：${detail}`
+        : '原生 3D 人物模型加载失败，请在鸿蒙模拟器或真机查看效果'
       this.hasError = true
       this.isLoading = false
       this.sceneReady = false
@@ -131,39 +131,21 @@ export struct ShowroomPage {
     this.sceneReady = false
   }
 
-  private startAutoRotate(): void {
-    if (this.autoRotateTimer >= 0) {
-      return
-    }
-
-    this.autoRotateTimer = setInterval(() => {
-      if (this.isInteracting || this.isLoading || this.hasError || !this.sceneReady) {
-        return
-      }
-
-      this.orbitYaw += SHOWROOM_AUTO_ROTATE_STEP
-      this.applyOrbitToScene()
-    }, 42)
-  }
-
-  private stopAutoRotate(): void {
-    if (this.autoRotateTimer >= 0) {
-      clearInterval(this.autoRotateTimer)
-      this.autoRotateTimer = -1
-    }
-  }
-
   private applyOrbitToScene(): void {
     if (!this.showroomScene || !this.showroomModel || !this.showroomCamera) {
       return
     }
 
-    this.showroomModel.rotation = buildYawQuaternion(this.orbitYaw)
-    this.applyLookAt(this.showroomCamera, buildCameraEye(this.orbitDistance), { x: 0, y: 0.08, z: 0 }, {
-      x: 0,
-      y: 1,
-      z: 0
-    })
+    this.applyLookAt(
+      this.showroomCamera,
+      buildCameraEye(this.orbitDistance, this.orbitYaw, this.orbitPitch, SHOWROOM_CAMERA_TARGET),
+      SHOWROOM_CAMERA_TARGET,
+      {
+        x: 0,
+        y: 1,
+        z: 0
+      }
+    )
     this.showroomScene.renderFrame({ alwaysRender: true })
   }
 
@@ -230,6 +212,14 @@ export struct ShowroomPage {
 
   private normalizeVec3(value: Vec3): Vec3 {
     const length: number = Math.sqrt(this.dotVec3(value, value))
+    if (length < 0.00001) {
+      return {
+        x: 0,
+        y: 0,
+        z: 0
+      }
+    }
+
     return {
       x: value.x / length,
       y: value.y / length,
@@ -251,6 +241,18 @@ export struct ShowroomPage {
       y: value.y * scalar,
       z: value.z * scalar,
       w: value.w * scalar
+    }
+  }
+
+  private quaternionFromAxisAngle(axis: Vec3, angle: number): Quaternion {
+    const normalizedAxis: Vec3 = this.normalizeVec3(axis)
+    const halfAngle: number = angle * 0.5
+    const sine: number = Math.sin(halfAngle)
+    return {
+      x: normalizedAxis.x * sine,
+      y: normalizedAxis.y * sine,
+      z: normalizedAxis.z * sine,
+      w: Math.cos(halfAngle)
     }
   }
 
@@ -276,7 +278,7 @@ export struct ShowroomPage {
               .fontWeight(FontWeight.Bold)
               .fontColor(AppColors.TextPrimary)
 
-            Text('原生 ArkGraphics3D 车模展示页，这次不再走 Web 3D。')
+            Text('原生 ArkGraphics3D 人物模型展示，支持上下左右和远近拖拽查看。')
               .fontSize(13)
               .fontColor(AppColors.TextSecondary)
           }
@@ -304,7 +306,7 @@ export struct ShowroomPage {
 
               Column({ space: 8 }) {
                 Row({ space: 8 }) {
-                  this.TagChip('Aurora X')
+                  this.TagChip('Simple Figure')
                   this.TagChip('ArkGraphics3D')
                 }
               }
@@ -321,33 +323,21 @@ export struct ShowroomPage {
                       GestureMode.Parallel,
                       PanGesture({ distance: 1 })
                         .onActionStart(() => {
-                          this.isInteracting = true
                           this.panStartYaw = this.orbitYaw
+                          this.panStartPitch = this.orbitPitch
                         })
                         .onActionUpdate((event: GestureEvent) => {
                           this.orbitYaw = deriveYawFromPan(this.panStartYaw, event.offsetX)
+                          this.orbitPitch = derivePitchFromPan(this.panStartPitch, event.offsetY)
                           this.applyOrbitToScene()
-                        })
-                        .onActionEnd(() => {
-                          this.isInteracting = false
-                        })
-                        .onActionCancel(() => {
-                          this.isInteracting = false
                         }),
                       PinchGesture({ fingers: 2 })
                         .onActionStart(() => {
-                          this.isInteracting = true
                           this.pinchStartDistance = this.orbitDistance
                         })
                         .onActionUpdate((event: GestureEvent) => {
                           this.orbitDistance = deriveDistanceFromPinch(this.pinchStartDistance, event.scale)
                           this.applyOrbitToScene()
-                        })
-                        .onActionEnd(() => {
-                          this.isInteracting = false
-                        })
-                        .onActionCancel(() => {
-                          this.isInteracting = false
                         })
                     )
                   )
@@ -359,7 +349,7 @@ export struct ShowroomPage {
             if (this.isLoading && !this.hasError) {
               Column({ space: 10 }) {
                 LoadingProgress().color(AppColors.Primary)
-                Text('正在准备原生 3D 展品...')
+                Text('正在准备人物模型...')
                   .fontSize(13)
                   .fontColor('#E6EDF8')
               }
@@ -371,7 +361,7 @@ export struct ShowroomPage {
 
             if (this.hasError) {
               Column({ space: 12 }) {
-                Text('展品暂时不可用')
+                Text('人物模型暂时不可用')
                   .fontSize(18)
                   .fontWeight(FontWeight.Bold)
                   .fontColor('#FFFFFF')
